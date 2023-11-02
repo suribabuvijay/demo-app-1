@@ -1,10 +1,6 @@
 pipeline {
-
-
   agent any
-
   stages {
-
     stage('Checkout Source') {
       steps {
         git 'https://github.com/suribabuvijay/demo-app-1.git'
@@ -12,20 +8,22 @@ pipeline {
     }
 
     stage('Build image') {
-      steps{
+      steps {
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
+
       }
     }
 
     stage('Push Image') {
-      steps{
+      steps {
         script {
           docker.withRegistry( "" ) {
             dockerImage.push()
           }
         }
+
       }
     }
 
@@ -34,9 +32,9 @@ pipeline {
         script {
           kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
         }
+
       }
     }
 
   }
-
 }
