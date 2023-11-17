@@ -16,7 +16,7 @@ spec:
         app: myweb
     spec:
       containers:
-      - image: suribabuvijay/demo-app1:25
+      - image: suribabuvijay/demo-app1:demoapp
         imagePullPolicy: Always
         name: myweb
 
